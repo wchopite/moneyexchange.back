@@ -1,0 +1,12 @@
+{
+  "server": {
+    "name": "MoneyExchange Server",
+    "port": 3000
+  },
+  "DB": {
+    "server": "localhost",
+    "name": "name",
+    "user": "user",
+    "password": "password"
+  }
+}
