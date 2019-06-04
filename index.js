@@ -11,5 +11,15 @@ DB()
     server.start({logger});
   })
   .catch((error) => {
-    logger.error({message: 'error mongodb conection', error});
+    logger.error('error mongodb conection', error);
   });
+
+process.on('uncaughtException', error => {
+  logger.error('uncaughtException', error);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', error => {
+  logger.error('unhandledRejection', error);
+  process.exit(1);
+});

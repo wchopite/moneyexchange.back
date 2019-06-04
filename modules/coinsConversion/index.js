@@ -2,7 +2,7 @@
 const conversionManager = require('./conversionManager');
 
 const handler = {
-  async converter(req, res) {
+  async convert(req, res) {
     let payload = req.body || null;
     let { base, to, value } = payload;
 
@@ -13,7 +13,7 @@ const handler = {
     }
 
     const result = await conversionManager.convert({base, to, value});
-    res.json({ value: result });
+    res.json({ result });
   },
   async save(req, res) {
     let payload = req.body || null;
@@ -30,6 +30,6 @@ const handler = {
 };
 
 module.exports = ({app}) => {
-  app.post(`/api/convertions`, handler.converter);
+  app.post(`/api/convertions`, handler.convert);
   app.put(`/api/convertions`, handler.save);
 };

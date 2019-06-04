@@ -19,14 +19,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 if (app.get('env') === 'development') {
   debug('Morgan enabled...');
-  app.use(morgan('tiny'));
+  app.use(morgan('combined'));
 }
-
-// global health check
-app.get('/api', (req, res) => res.json({status: 'ok'}));
 
 module.exports.start = ({logger}) => {
   logger.info(`${config.get('server.name')} service started`);
+
+  // global health check
+  app.get('/api', (req, res) => res.json({status: 'ok'}));
 
   // Load modules
   require('./modules/coins')({app, logger});
@@ -34,7 +34,7 @@ module.exports.start = ({logger}) => {
 
   // TODO: add this function to a specific file (maybe a middleware)
   app.use((error, req, res, next) => {
-    logger.error({ error }, );
+    logger.error(error.message, error);
     res.status(500).json({ message: 'Error', error: error.message });
   });
 
