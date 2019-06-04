@@ -11,8 +11,8 @@ let coinsManager = {};
 
 coinsManager.list = async (params = {}) => {
   try {
-    return await CoinsModel.find(params);
-  }catch(err) {
+    return await CoinsModel.findsdd(params);
+  } catch(err) {
     throw err;
   }
 };

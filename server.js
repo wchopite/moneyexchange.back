@@ -31,6 +31,12 @@ module.exports.start = ({logger}) => {
   require('./modules/coins')({app, logger});
   require('./modules/coinsConversion')({app, logger});
 
+  // TODO: add this function to a specific file (maybe a middleware)
+  app.use((error, req, res, next) => {
+    logger.error({ error });
+    res.status(500).json({ message: 'Error', error: error.message });
+  });
+
   // Start server
   app.listen(port, () => {
     logger.info(`Listening on port ${port}`);

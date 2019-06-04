@@ -31,8 +31,11 @@ conversionManager.convert = async (params = {}) => {
   const { value, base, to } = params;
 
   try {
-    const conversion = await ConversionModel.findOne({ base, to });
-    const newValue = value*conversion.conversionFactor;
+    const conversion = await ConversionModel
+      .find({ base, to })
+      .sort({ createdAt: -1})
+      .limit(1);
+    const newValue = value*conversion[0].conversionFactor;
     return newValue;
   } catch(err) {
     throw err;
