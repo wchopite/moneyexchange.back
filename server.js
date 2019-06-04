@@ -34,7 +34,6 @@ module.exports.start = ({logger}) => {
 
   // TODO: add this function to a specific file (maybe a middleware)
   app.use((error, req, res, next) => {
-    console.log(error);
     logger.error({ error });
     res.status(500).json({ message: 'Error', error: error.message });
   });
