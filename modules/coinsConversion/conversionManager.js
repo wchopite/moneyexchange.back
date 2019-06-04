@@ -24,10 +24,16 @@ conversionManager.save = async (data = {}) => {
 };
 
 conversionManager.convert = async (params = {}) => {
-  const { value, base, to } = params;
+  const { base, to, value } = params;
+  const query = {
+    $or: [
+      { $and: [{base, to}]},
+      { $and: [{base: to, to: base}]},
+    ]
+  }
 
   const conversion = await ConversionModel
-    .find({ base, to })
+    .find(query)
     .sort({ createdAt: -1})
     .limit(1);
   const newValue = value*conversion[0].conversionFactor;

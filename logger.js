@@ -1,18 +1,31 @@
 // Dependencies
-const config = require('config');
-const bunyan = require('bunyan');
-const log = bunyan.createLogger({ name: config.get('server.name')});
+const winston = require('winston');
+
+const log = winston.createLogger({
+  level: 'info',
+  format: winston.format.colorize(),
+  transports: [
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'combined.log' })
+  ]
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  log.add(new winston.transports.Console({
+    format: winston.format.simple()
+  }));
+}
 
 // TODO: make a better abstraction of bunyan library
 const logger = {
-  info(msg) {
-    log.info(msg);
+  info(msg, error = {}) {
+    log.info(msg, error);
   },
-  warn(msg) {
-    log.warn(msg);
+  warn(msg, error = {}) {
+    log.warn(msg, error);
   },
-  error(msg) {
-    log.error(msg);
+  error(msg, error = {}) {
+    log.error(msg, error);
   }
 };
 
