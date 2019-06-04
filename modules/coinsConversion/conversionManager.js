@@ -30,7 +30,7 @@ conversionManager.convert = async (params = {}) => {
       { $and: [{base, to}]},
       { $and: [{base: to, to: base}]},
     ]
-  }
+  };
 
   const conversion = await ConversionModel
     .find(query)
