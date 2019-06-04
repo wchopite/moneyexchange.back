@@ -1,5 +1,5 @@
 /**
- * Interface of the module
+ * Interface of coins module
  */
 const mongoose = require('mongoose');
 
@@ -10,11 +10,7 @@ const CoinsModel = mongoose.model('Coins');
 let coinsManager = {};
 
 coinsManager.list = async (params = {}) => {
-  try {
-    return await CoinsModel.findsdd(params);
-  } catch(err) {
-    throw err;
-  }
+  return await CoinsModel.find(params).sort('name');
 };
 
 module.exports = coinsManager;

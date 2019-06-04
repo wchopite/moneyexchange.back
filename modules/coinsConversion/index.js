@@ -1,8 +1,6 @@
 // Dependencies
 const conversionManager = require('./conversionManager');
 
-let _logger;
-
 const handler = {
   async converter(req, res) {
     let payload = req.body || null;
@@ -26,18 +24,12 @@ const handler = {
       return;
     }
 
-    try {
-      let result = await conversionManager.save(payload);
-      res.json(result);
-    } catch(err) {
-      _logger.error({caller: 'coinsConvertion.save', payload, err});
-      res.status(500).json({message: 'Error trying to save the document'});
-    }
+    let result = await conversionManager.save(payload);
+    res.json(result);
   }
 };
 
-module.exports = ({app, logger}) => {
-  _logger = logger;
-  app.post(`/api/convertions`, handler.converter);
-  app.put(`/api/convertions`, handler.save);
+module.exports = ({app, asyncMiddleware}) => {
+  app.post(`/api/convertions`, asyncMiddleware(handler.converter));
+  app.put(`/api/convertions`, asyncMiddleware(handler.save));
 };

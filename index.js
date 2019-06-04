@@ -11,5 +11,6 @@ DB()
     server.start({logger});
   })
   .catch((error) => {
+    console.log(error);
     logger.error({message: 'error mongodb conection', error});
   });

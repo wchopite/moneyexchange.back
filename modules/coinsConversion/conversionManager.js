@@ -20,26 +20,18 @@ conversionManager.save = async (data = {}) => {
     date: now
   });
 
-  try {
-    return await conversion.save();
-  }catch (err) {
-    throw err;
-  }
+  return await conversion.save();
 };
 
 conversionManager.convert = async (params = {}) => {
   const { value, base, to } = params;
 
-  try {
-    const conversion = await ConversionModel
-      .find({ base, to })
-      .sort({ createdAt: -1})
-      .limit(1);
-    const newValue = value*conversion[0].conversionFactor;
-    return newValue;
-  } catch(err) {
-    throw err;
-  }
+  const conversion = await ConversionModel
+    .find({ base, to })
+    .sort({ createdAt: -1})
+    .limit(1);
+  const newValue = value*conversion[0].conversionFactor;
+  return newValue;
 };
 
 module.exports = conversionManager;
