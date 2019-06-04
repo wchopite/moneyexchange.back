@@ -29,7 +29,7 @@ const handler = {
   }
 };
 
-module.exports = ({app, asyncMiddleware}) => {
-  app.post(`/api/convertions`, asyncMiddleware(handler.converter));
-  app.put(`/api/convertions`, asyncMiddleware(handler.save));
+module.exports = ({app}) => {
+  app.post(`/api/convertions`, handler.converter);
+  app.put(`/api/convertions`, handler.save);
 };

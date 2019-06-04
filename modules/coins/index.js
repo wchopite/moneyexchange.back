@@ -8,6 +8,6 @@ const handler = {
   }
 };
 
-module.exports = ({app, asyncMiddleware}) => {
-  app.get(`/api/coins/`, asyncMiddleware(handler.listCoins));
+module.exports = ({app}) => {
+  app.get(`/api/coins/`, handler.listCoins);
 };
