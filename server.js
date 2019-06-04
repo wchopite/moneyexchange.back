@@ -8,6 +8,7 @@ const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const debug = require('debug')('app:startup');
+const asyncMiddleware = require('./middlewares/async');
 
 const app = express();
 const port = process.env.PORT || config.get('server.port');
@@ -28,11 +29,12 @@ module.exports.start = ({logger}) => {
   logger.info(`${config.get('server.name')} service started`);
 
   // Load modules
-  require('./modules/coins')({app, logger});
-  require('./modules/coinsConversion')({app, logger});
+  require('./modules/coins')({app, asyncMiddleware, logger});
+  require('./modules/coinsConversion')({app, asyncMiddleware, logger});
 
   // TODO: add this function to a specific file (maybe a middleware)
   app.use((error, req, res, next) => {
+    console.log(error);
     logger.error({ error });
     res.status(500).json({ message: 'Error', error: error.message });
   });
