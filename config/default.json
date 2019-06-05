@@ -8,5 +8,9 @@
     "name": "name",
     "user": "user",
     "password": "password"
+  },
+  "conversor": {
+    "roundTo": 4,
+    "operator": "*"
   }
 }

@@ -29,8 +29,8 @@ module.exports.start = ({logger}) => {
   app.get('/api', (req, res) => res.json({status: 'ok'}));
 
   // Load modules
-  require('./modules/coins')({app, logger});
-  require('./modules/coinsConversion')({app, logger});
+  require('./modules/coins')({app});
+  require('./modules/coinsConversion')({app});
 
   // TODO: add this function to a specific file (maybe a middleware)
   app.use((error, req, res, next) => {

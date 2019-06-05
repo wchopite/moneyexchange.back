@@ -1,7 +1,9 @@
 /**
  * Interface of the module
  */
+const config = require('config');
 const mongoose = require('mongoose');
+const { convert } = require('../../utils/conversor');
 
 // Import the model
 require('./conversionModel');
@@ -32,11 +34,14 @@ conversionManager.convert = async (params = {}) => {
     ]
   };
 
-  const conversion = await ConversionModel
-    .find(query)
+  let conversion = await ConversionModel
+    .findOne(query)
     .sort({ createdAt: -1})
     .limit(1);
-  const newValue = value*conversion[0].conversionFactor;
+
+  const operator = (conversion.base === base) ? config.get('conversor.operator') : '/';
+  const roundTo = config.get('conversor.roundTo');
+  const newValue = convert(value, conversion.conversionFactor)(operator, roundTo);
   return newValue;
 };
 
