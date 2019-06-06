@@ -1,12 +1,8 @@
 // Dependencies
 const { expect } = require('chai');
 const request = require('supertest');
-const mongoose = require('mongoose');
 const DB = require('../../dbManager/index');
-
-// Import the coinsModel
-require('../../modules/coins/coinsModel');
-const CoinsModel = mongoose.model('Coins');
+const CoinModel = require('../../modules/coins/coinModel');
 
 describe('Coins', () => {
   let server;
@@ -38,11 +34,11 @@ describe('Coins', () => {
     };
 
     beforeEach(async () => {
-      return await new CoinsModel(coin).save();
+      return await new CoinModel(coin).save();
     });
 
     afterEach(async () => {
-      return await CoinsModel.deleteMany({});
+      return await CoinModel.deleteMany({});
     });
 
     it('Should return all coins registered', (done) => {

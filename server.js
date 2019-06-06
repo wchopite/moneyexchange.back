@@ -10,6 +10,7 @@ const morgan = require('morgan');
 const debug = require('debug')('app:startup');
 const logger = require('./logger');
 const schemaValidator = require('./utils/schemaValidor');
+const checkAuth = require('./middlewares/check-auth');
 require('express-async-errors');
 
 const app = express();
@@ -45,10 +46,11 @@ app.get('/api', (req, res) => res.json({status: 'ok'}));
 
 // Load modules
 require('./modules/coins')({app, logger, schemaValidator});
-require('./modules/coinsConversion')({app, logger, schemaValidator});
+require('./modules/coinsConversion')({app, logger, schemaValidator, checkAuth});
+require('./modules/users')({app, logger, schemaValidator});
 
 // TODO: add this function to a specific file (maybe a middleware)
-app.use((error, req, res) => {
+app.use((error, req, res, next) => {
   logger.error(error.message, error);
   res.status(500).json({ message: 'Error', error: error.message });
 });
