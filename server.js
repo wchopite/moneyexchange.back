@@ -41,8 +41,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// global health check
-app.get('/api', (req, res) => res.json({status: 'ok'}));
+// global health check (kubernetes)
+app.get('/', (req, res) => res.json({status: 'ok'}));
 
 // Load modules
 require('./modules/coins')({app, logger, schemaValidator});

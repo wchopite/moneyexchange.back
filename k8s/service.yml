@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: moneyexchange
+spec:
+  selector:
+    app: moneyexchange
+  type: NodePort
+  ports:
+  - protocol: TCP
+    nodePort: 32131
+    port: 80
+    targetPort: 8080
