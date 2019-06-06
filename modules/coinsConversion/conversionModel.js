@@ -25,4 +25,4 @@ const conversionSchema = new Schema({
   }
 });
 
-mongoose.model('CoinsConversion', conversionSchema);
+module.exports = mongoose.model('CoinsConversion', conversionSchema);
