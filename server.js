@@ -9,7 +9,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const debug = require('debug')('app:startup');
 const logger = require('./logger');
-const schemaValidator = require('./utils/schemaValidor');
+const schemaValidator = require('./utils/schemaValidator');
 const checkAuth = require('./middlewares/check-auth');
 require('express-async-errors');
 
