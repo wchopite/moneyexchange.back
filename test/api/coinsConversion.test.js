@@ -1,16 +1,9 @@
 // Dependencies
 const expect = require('chai').expect;
 const request = require('supertest');
-const mongoose = require('mongoose');
 const DB = require('../../dbManager/index');
-
-// Import the conversionModel
-require('../../modules/coinsConversion/conversionModel');
-const ConversionModel = mongoose.model('CoinsConversion');
-
-// Import the coinsModel
-require('../../modules/coins/coinsModel');
-const CoinsModel = mongoose.model('Coins');
+const ConversionModel = require('../../modules/coinsConversion/conversionModel');
+const CoinModel = require('../../modules/coins/coinModel');
 
 describe('Coins Conversion', () => {
   let server;
@@ -62,15 +55,15 @@ describe('Coins Conversion', () => {
   describe('POST /api/conversions', () => {
     beforeEach((done) => {
       Promise.all([
-        new CoinsModel(USD).save(),
-        new CoinsModel(EUR).save(),
+        new CoinModel(USD).save(),
+        new CoinModel(EUR).save(),
         new ConversionModel(conversion).save()
       ]).then(() => done());
     });
 
     afterEach((done) => {
       Promise.all([
-        CoinsModel.deleteMany({}),
+        CoinModel.deleteMany({}),
         ConversionModel.deleteMany({})
       ]).then(() => done());
     });

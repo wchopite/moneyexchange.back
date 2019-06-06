@@ -54,10 +54,10 @@ const handler = {
   }
 };
 
-module.exports = ({app, logger, schemaValidator}) => {
+module.exports = ({app, logger, schemaValidator, checkAuth}) => {
   _logger = logger;
   _schemaValidator = schemaValidator;
 
   app.post(`/api/conversions`, handler.convert);
-  app.put(`/api/conversions`, handler.save);
+  app.put(`/api/conversions`, checkAuth, handler.save);
 };

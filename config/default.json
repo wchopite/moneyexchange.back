@@ -12,5 +12,9 @@
   "conversor": {
     "roundTo": 4,
     "operator": "*"
+  },
+  "JWT": {
+    "private_key": "secret",
+    "expirationTime": "1h"
   }
 }

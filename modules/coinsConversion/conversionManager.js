@@ -2,12 +2,8 @@
  * Interface of the module
  */
 const config = require('config');
-const mongoose = require('mongoose');
 const { convert } = require('../../utils/conversor');
-
-// Import the model
-require('./conversionModel');
-const ConversionModel = mongoose.model('CoinsConversion');
+const ConversionModel = require('./conversionModel');
 
 let conversionManager = {};
 
