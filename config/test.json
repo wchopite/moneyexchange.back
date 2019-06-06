@@ -1,9 +1,14 @@
 {
   "server": {
-    "name": "MoneyExchange Server - Test"
+    "name": "MoneyExchange Server - Test",
+    "port": 8080
   },
   "DB": {
     "server": "localhost",
-    "name": "money_exchange"
+    "name": "money_exchange_test"
+  },
+  "conversor": {
+    "roundTo": 4,
+    "operator": "*"
   }
 }

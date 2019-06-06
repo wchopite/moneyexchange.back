@@ -9,6 +9,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const debug = require('debug')('app:startup');
 const logger = require('./logger');
+const schemaValidator = require('./utils/schemaValidor');
 require('express-async-errors');
 
 const app = express();
@@ -43,8 +44,8 @@ app.use((req, res, next) => {
 app.get('/api', (req, res) => res.json({status: 'ok'}));
 
 // Load modules
-require('./modules/coins')({app, logger});
-require('./modules/coinsConversion')({app, logger});
+require('./modules/coins')({app, logger, schemaValidator});
+require('./modules/coinsConversion')({app, logger, schemaValidator});
 
 // TODO: add this function to a specific file (maybe a middleware)
 app.use((error, req, res) => {
