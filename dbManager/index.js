@@ -7,7 +7,7 @@ let dbUtilities = {
   buildConnectionString() {
     let connectionString = '';
 
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'test') {
+    if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
       connectionString = `mongodb://localhost/${config.get('DB.name')}`;
       debug(connectionString);
       return connectionString;
