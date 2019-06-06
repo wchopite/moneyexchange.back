@@ -1,5 +1,5 @@
 # Base Image
-FROM node:lts-alpine
+FROM node:10
 
 WORKDIR /usr/app
 
@@ -7,6 +7,8 @@ WORKDIR /usr/app
 COPY ./package.json ./
 RUN npm install
 COPY ./ ./
+
+EXPOSE 8080 8080
 
 # Default command
 CMD ["npm", "start"]

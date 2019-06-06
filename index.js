@@ -1,14 +1,13 @@
 // Depedendencies
-const server = require('./server');
-const logger = require('./logger');
 const DB = require('./dbManager');
+const logger = require('./logger');
 
-DB()
+DB.connect()
   .then(() => {
     logger.info('connected to the database');
 
     // start server
-    server.start({logger});
+    require('./server');
   })
   .catch((error) => {
     logger.error('error mongodb conection', error);
