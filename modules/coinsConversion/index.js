@@ -1,6 +1,8 @@
 // Dependencies
 const conversionManager = require('./conversionManager');
 
+let _logger;
+
 const handler = {
   async convert(req, res) {
     let payload = req.body || null;
@@ -29,7 +31,8 @@ const handler = {
   }
 };
 
-module.exports = ({app}) => {
-  app.post(`/api/convertions`, handler.convert);
-  app.put(`/api/convertions`, handler.save);
+module.exports = ({app, logger}) => {
+  _logger = logger;
+  app.post(`/api/conversions`, handler.convert);
+  app.put(`/api/conversions`, handler.save);
 };

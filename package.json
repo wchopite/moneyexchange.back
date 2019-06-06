@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "DEBUG=app:* nodemon index.js",
-    "test": "NODE_ENV=test mocha",
+    "test": "NODE_ENV=test mocha --recursive",
     "coverage": "nyc npm run test",
     "lint": "eslint ./",
     "verify": "npm run lint && npm run test"
@@ -32,11 +32,11 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "helmet": "^3.18.0",
-    "joi": "^14.3.1",
     "mongodb": "^3.2.6",
     "mongoose": "^5.5.12",
     "morgan": "^1.9.1",
     "redis": "^2.8.0",
+    "supertest": "^4.0.2",
     "winston": "^3.2.1"
   },
   "devDependencies": {

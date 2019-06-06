@@ -7,7 +7,7 @@ const { convert } = require('../../utils/conversor');
 
 // Import the model
 require('./conversionModel');
-const ConversionModel = mongoose.model('Coins_Conversion');
+const ConversionModel = mongoose.model('CoinsConversion');
 
 let conversionManager = {};
 

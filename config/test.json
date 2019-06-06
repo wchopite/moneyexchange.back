@@ -1,5 +1,9 @@
 {
   "server": {
     "name": "MoneyExchange Server - Test"
+  },
+  "DB": {
+    "server": "localhost",
+    "name": "money_exchange"
   }
 }
