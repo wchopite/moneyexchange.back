@@ -1,5 +1,5 @@
 /**
- * Interface of coins module
+ * Interface of the module
  */
 const CoinModel = require('./coinModel');
 
